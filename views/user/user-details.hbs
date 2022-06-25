@@ -1,0 +1,264 @@
+<div class="container">
+  <div class="main-body">
+    <div class="row gutters-sm">
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex flex-column align-items-center text-center">
+              <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                width="150">
+              <div class="mt-3">
+                <h4>{{userData.Name}}</h4>
+                <p class="text-muted font-size-sm">{{userData.Email}}</p>
+                <a href="/add-address" class="btn btn-primary">Add address</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+      <div class="col-md-8">
+        <div class="card mb-3">
+          <div class="card-body" style="height:21rem;">
+
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Name</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userData.Name}}
+              </div>
+
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Email</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userData.Email}}
+              </div>
+
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <h6 class="mb-0">Mobile Phone</h6>
+              </div>
+              <div class="col-sm-9 text-secondary">
+                {{userData.Mobile}}
+              </div>
+
+            </div>
+
+            <hr>
+            <div class="row">
+
+              <div class="col-sm-12 ">
+
+                <a class="btn btn-info " href="/edit-user?id={{userData._id}}" onclick="editUser(event)">Edit</a>
+
+                <a href="/edit-password" class="btn btn-secondary">Change Password</a>
+              </div>
+            </div>
+            <div class="">
+
+              <div class="dropdown">
+
+                <button id="dLabel" type="button" data-toggle="dropdown" style="border-style: none;"
+                  aria-haspopup="true" aria-expanded="false">
+                  <i class="icon-credit-card " aria-hidden="true"></i>
+
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dLabel">
+
+
+                  <div class="product-body text-center">
+
+
+                    <p class="product-name"><a href="#"></a>Balance Amount</p>
+                    <h6 class="product-price font-weight-bold btn-success"><span class="qty"></span>Rs :{{ wallet}}</h6>
+                  </div>
+                </div>
+              </div>
+              <h6>Invite Your friends to SHOPPERS:</h6>
+              <h6 style="color: dodgerblue;">{{referalLink}}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row gutters-sm col-md-12 ">
+          {{#each userData.address}}
+          <div class="col-sm-6 mb-3">
+            <div class="card h-100">
+              <div class="card-body " style="margin:1rem">
+
+                <h6 class="d-flex align-items-center mb-3">House address : {{inc @index}}</h6>
+                <small>House Name: {{this.HouseName}}</small>
+                <div class="progress mb-3" style="height: 5px">
+
+                </div>
+                <small>Street Location: {{this.StreetLocation}}</small>
+                <div class="progress mb-3" style="height: 5px">
+                </div>
+                <small>Pincode:{{this.Pincode}}</small>
+                <div class="progress mb-3" style="height: 5px">
+                </div>
+                <small>State:{{this.State}}</small>
+                <div class="progress mb-3" style="height: 5px">
+                </div>
+                <div style="text-align: center;">
+                  <button onclick="deleteAddress('{{this._id}}')"
+                    class=" btn btn-danger btn-lg btn-block">Delete</button>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+
+<style>
+  body {
+    margin-top: 0px;
+    color: #1a202c;
+    text-align: left;
+    background-color: #e2e8f0;
+  }
+
+  .main-body {
+    padding: 15px;
+  }
+
+  .card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+  }
+
+  .gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+  }
+
+  .gutters-sm>.col,
+  .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .mb-3,
+  .my-3 {
+    margin-bottom: 1rem !important;
+  }
+
+  .bg-gray-300 {
+    background-color: #e2e8f0;
+  }
+
+  .h-100 {
+    height: 100% !important;
+  }
+
+  .shadow-none {
+    box-shadow: none !important;
+  }
+</style>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function deleteAddress(addId) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You wantt to Delete this Address!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: `Yes`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/delete-address',
+          data: {
+            addId: addId
+          },
+          method: 'post',
+          success: (response) => {
+            if (response) {
+
+              location.reload()
+            }
+          }
+        })
+      }
+    })
+  }
+
+
+  function editUser(event) {
+    var link = event.currentTarget.href;
+
+    event.preventDefault();
+
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to edit!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: `Yes`
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+      }
+    })
+  }
+
+
+
+
+
+
+
+</script>

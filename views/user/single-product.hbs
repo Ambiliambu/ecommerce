@@ -1,0 +1,67 @@
+<div class="site-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5">
+        <img src="/product-images/{{product._id}}.jpg" style="height:430px " alt="Image" class="img-fluid">
+
+      </div>
+      <div class="col-md-2">
+
+        <div class="row ">
+          <div class="product-preview " style="height:110px ;">
+            <img src="/product-images/{{product._id}}.jpg" style="width:100px ;height: 100px;" alt="">
+          </div>
+
+          <div class="product-preview" style="height:110px ;">
+            <img src="/product-images/{{product._id}}a.jpg" style="width:100px ;height: 100px;" alt="">
+          </div>
+
+          <div class="product-preview" style="height:110px ;">
+            <img src="/product-images/{{product._id}}b.jpg" style="width:100px ;height: 100px;" alt="">
+          </div>
+
+          <div class="product-preview" style="height:110px ;">
+            <img src="/product-images/{{product._id}}c.jpg" style="width:100px ;height: 100px;" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2 class="text-primary">{{product.Name}}</h2>
+        <h4 class="text-black">{{product.Category}}</h4>
+        <p>{{product.Description}}</p>
+        <p><strong class="text-primary h4">Rs.{{product.Price}}</strong>
+          {{#if product.actualPrice}}
+          <del class="product-old-price ml-2 text-danger">Rs.{{product.actualPrice}}</del>
+          {{/if}}
+        </p>
+
+        <button onclick="addToCart('{{product._id}}')" class="btn btn-primary" id="click">Add To Cart</button>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-md-6 ">
+
+  </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  $('#click').on('click', function () {
+
+    Swal.fire(
+      'Add to Cart Successfully!',
+      '',
+      'success'
+
+    )
+  })
+</script>

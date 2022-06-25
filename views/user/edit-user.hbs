@@ -1,0 +1,173 @@
+<div class="container">
+    <div class="main-body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex flex-column align-items-center text-center">
+                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                                class="rounded-circle p-1 bg-primary" width="110">
+                            <div class="mt-3">
+                                <h4>{{userDetails.Name}}</h4>
+                                <p class="text-muted font-size-sm">{{userDetails.Email}}</p>
+                                <button class="btn btn-primary">Follow</button>
+                                <button class="btn btn-outline-primary">Message</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="card-body">
+                        <form action="/edit-user/{{userDetails._id}}" id="form" method="post">
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Full Name</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" class="form-control" name="Name" id="name"
+                                        value="{{userDetails.Name}}" required>
+                                    <span id="errorName" style="color:red;"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Email</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="email" class="form-control" name="Email" id="email"
+                                        value="{{userDetails.Email}}">
+                                    <span id="errorEmail" style="color:red;"></span>
+
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Mobile Phone</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" class="form-control" name="Mobile" id="mobile"
+                                        value="{{userDetails.Mobile}}" required>
+                                    <span id="errorMobile" style="color:red;"></span>
+
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-sm-3"></div>
+                                <div class="col-sm-9 text-secondary">
+                                    <button type="submit" class="btn btn-primary px-4">Save Changes</button>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const mobile = document.getElementById("mobile");
+    const form = document.getElementById("form");
+
+
+    const error1 = document.getElementById("errorName")
+    const error2 = document.getElementById("errorEmail");
+    const error3 = document.getElementById("errorMobile")
+
+
+
+    form.addEventListener('submit', (e) => {
+        let message1 = []
+        let message2 = []
+        let message3 = []
+
+
+        if (name.value === '' || name.value === null) {
+            message1.push('Please Enter the Name')
+
+        }
+        else if (isNaN(name.value) === false) {
+            message1.push('Please Enter Valid Name')
+
+        } else if (name.value.length < 3) {
+            message1.push('Please Valid Name')
+        }
+        if (email.value === '' || email.value === null) {
+            message2.push('Please Enter the  Email')
+        }
+        else if (email.value.match(mailformat) === false) {
+            message2.push('Please  Enter Valid Email')
+        }
+        if (mobile.value === '' || mobile.value === null) {
+            message3.push('Please Enter the Number')
+        }
+        else if (mobile.value.length < 10 || mobile.value.length > 10) {
+            message3.push('Please Enter Valid Number')
+
+        }
+
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join('  ')
+        } else {
+            error1.innerText = ' '
+
+        }
+        if (message2.length > 0) {
+            e.preventDefault()
+            error2.innerText = message2.join('  ')
+        } else {
+            error2.innerText = ' '
+        }
+        if (message3.length > 0) {
+            e.preventDefault()
+            error3.innerText = message3.join('  ')
+        }
+        else {
+            error3.innerText = ' '
+        }
+
+    })
+</script>
+
+
+<style>
+    body {
+        background: #f7f7ff;
+        margin-top: 0px;
+    }
+
+    .card {
+        margin-top: 30px;
+
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border: 0 solid transparent;
+        border-radius: .25rem;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
+    }
+
+    .me-2 {
+        margin-right: .5rem !important;
+    }
+</style>

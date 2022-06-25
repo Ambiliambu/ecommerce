@@ -1,0 +1,75 @@
+<section class="container m-5">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Add Category</h2>
+                <form action="/admin/add-category" method="post" id="form" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="">Category</label>
+                        <input type="text" name="Category" class="form-control" id="category">
+                        <span id="errorCategory" style="color:red;"></span>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label for="">Image</label>
+                        <img src="/product-images/{{product._id}}.jpg" style="width:100px;height: auto;" id="imgView"
+                            class="pt-3">
+                        <input type="file" name="image" id="file" onchange="viewImage(event)">
+
+                    </div>
+
+
+
+
+                    <button type="submit" class="btn btn-success mt-4" onclick="checkFile()">Submit </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<script>
+    function viewImage(event) {
+        document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+    }
+</script>
+
+<script>
+    const category = document.getElementById("category");
+    const form = document.getElementById("form")
+    // const image=document.getElementById("file") 
+
+    const error1 = document.getElementById("errorCategory")
+    // const error5=document.getElementById("errorImage") --}}
+
+    form.addEventListener('submit', (e) => {
+        let message1 = []
+        // let message2=[]
+
+        if (category.value === '' || category.value == null) {
+            message1.push('Please enter the Category Name')
+        } else if (isNaN(category.value) === false) {
+            message1.push('Please enter Valid Category Name')
+        }
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join(' , ')
+        }
+
+
+    })
+
+    function checkFile() {
+        let fileInputField = document.getElementById("file");
+
+        if (fileInputField.files?.length === 0) {
+            alert("Please select a file!")
+        }
+
+    }
+
+</script>

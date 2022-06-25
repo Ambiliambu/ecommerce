@@ -1,0 +1,109 @@
+<section class="container">
+  <div class="container p-5">
+
+    <table class="table mt-5 " id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Mobile</th>
+          <th scope="col">Status</th>
+          <th>Option</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}
+        <tr>
+          <th scope="row">{{inc @index}}</th>
+          <td>{{this.Name}}</td>
+          <td>{{this.Email}}</td>
+          <td>{{this.Mobile}}</td>
+          {{#if this.Status}}
+          <td style="color:green">Active</td>
+          {{else}}
+          <td style="color:red">Blocked</td>
+          {{/if}}
+          <td>
+            {{#if this.Status}}
+            <a class="btn btn-danger" onclick="blockUser(event)" name="{{this.Name}}"
+              href="/admin/block-user?id={{this._id}}">Block</a>
+            {{else}}
+            <a class="btn btn-success" onclick="unblockUser(event)" name="{{this.Name}}"
+              href="/admin/unblock-user?id={{this._id}}">Unblock</a>
+            {{/if}}
+
+          </td>
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function blockUser(event) {
+
+    var name = event.currentTarget.name;
+    var link = event.currentTarget.href;
+    event.preventDefault();
+
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to block  " + name + "!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: ` Yes `
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+
+      }
+    })
+  }
+
+
+  function unblockUser(event) {
+    var link = event.currentTarget.href;
+    var name = event.currentTarget.name;
+    event.preventDefault();
+
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to unblock  " + name + "!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: `Yes`
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+      }
+    })
+  }  
+</script>
+   

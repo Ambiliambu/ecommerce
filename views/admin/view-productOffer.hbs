@@ -1,0 +1,71 @@
+<section class="container">
+  <div class="container p-5">
+    <div class="row m-2">
+      <a href="/admin/add-proOffer" class="btn btn-success  ml-auto ">Add Product Offer</a>
+    </div>
+    <table class="table mt-5" id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Product Name</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End State</th>
+          <th scope="col">Offer Percentage</th>
+          <th>Option</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each productOffer}}
+        <tr>
+          <th scope="row">{{inc @index}}</th>
+          <td>{{this.Name}}</td>
+          <td>{{this.startDate}}</td>
+          <td>{{this.endDate}}</td>
+          <td>{{this.offerPercent}}%</td>
+          <td>
+            <a href="/admin/delete-proOffer?id={{this._id}}" class="btn btn-danger" onclick="deleteProOffer(event)"
+              name="{{this.Name}}">Delete</a>
+          </td>
+
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function deleteProOffer(event) {
+
+    var link = event.currentTarget.href;
+    event.preventDefault();
+
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: ` Yes `
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+
+      }
+    })
+  }
+
+</script>

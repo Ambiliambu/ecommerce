@@ -1,0 +1,158 @@
+<div class="container">
+
+
+  <div class="text-center mb-2">
+    <h3><strong>Sales Report</strong> <small> <strong>{{data.start}}- to -{{data.end}}</strong></small></h3>
+  </div>
+
+  <div class=" ml-3 ">
+    <div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="" style="background:#494ca2;color:white" role="button"
+        id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+        Search
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="/admin/limit-report?limit=yearly">Yearly</a>
+        <a class="dropdown-item" href="/admin/limit-report?limit=monthly">Monthly</a>
+        <a class="dropdown-item" href="/admin/limit-report?limit=weekly">Weekly</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="ml-3 mb-2">
+    <div class="col-md-12">
+      <form action="/admin/date-report" method="post">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="start">
+              <h6>From Date</h6>
+            </label>
+            <input type="date" class="form-control" id="start" name="startDate" required>
+          </div>
+          <div class="form-group col-md-4">
+            <label for="end">
+              <h6>To Date</h6>
+            </label>
+            <input type="date" class="form-control" id="end" name="endDate" required>
+          </div>
+          <div class="form-group col-md-4 " style="margin-top:36px ;">
+            <input type="submit" value="Search" class="btn btn-block" style="background:#494ca2;color:white">
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="row no-gutters">
+    <div class="col-12 col-sm-6 col-md-8">
+      <div class="container p-4">
+
+        <table id="Table" class="" style="">
+          <thead>
+            <div style="color:#494ca2"> Orders</div>
+            <tr>
+
+              <th>Date</th>
+              <th>User Name</th>
+              <th>Address</th>
+              <th>Payment</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each orders}}
+            <tr>
+              <td>{{this.date}}</td>
+              <td>{{this.deliveryDetails.name}}</td>
+              <td>
+                {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
+              </td>
+              <td>{{this.paymentMethod}}</td>
+              <td>{{this.totalAmount}}</td>
+              <td>{{this.status}}</td>
+            </tr>
+            {{/each}}
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <div class="col-6 col-md-4">
+      <div class="row ml-5" style="margin-top:11rem ">
+
+        <div class="col-sm-6  ">
+          <div class="card  " style="width: 255px;">
+            <div class="card-body " style="margin:1rem;">
+
+              <h6 class="d-flex align-items-center mb-3" style="color:#494ca2 ;">Report summary </h6>
+              <small>Totl Sales : {{data.totalSales}}</small>
+              <div class="progress mb-3" style="height: 5px">
+
+              </div>
+              <small>Total Orders : {{data.totalOrders}}</small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+              <small>Delivered Orders : {{data.deliveredOrder}}</small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+              <small>Pending Orders : {{data.faildOrders}}</small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+              <small>COD : {{data.cod}} </small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+              <small>Paypal : {{data.paypal}}</small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+              <small> Razorpay : {{data.razorpay}} </small>
+              <div class="progress mb-3" style="height: 5px">
+              </div>
+
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function () {
+    $('#Table').DataTable({
+      dom: 'Bfrtip',
+      buttons: [
+        'copy', 'csv', 'excel', 'pdf', 'print'
+      ]
+    });
+  });
+</script>

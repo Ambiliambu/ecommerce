@@ -1,0 +1,114 @@
+<section class="container">
+  <div class="container p-2">
+
+    <table class="table mt-5" id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Address</th>
+          <th>Mobile</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Payment</th>
+          <th>Status</th>
+          <th>Option</th>
+          <th></th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <th scope="row">{{this.date}}</th>
+          <td>
+            {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
+          </td>
+          <td>{{this.deliveryDetails.phone}}</td>
+          <td>{{this.totalAmount}}</td>
+          <td>{{this.paymentMethod}}</td>
+          <td>{{this.status}}</td>
+
+          {{#if this.cancel}}
+          <td><a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a></td>
+
+
+          {{else}}
+          {{#if this.delivery}}
+          <td><a class=" btn" style="width:max-content;">Return</a></td>
+          <td> <a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a> </td>
+
+          {{else}}
+          <td> <a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a></td>
+
+          <td><button
+              onclick="removeOrder('{{this._id}}','{{this.userId}}','{{this.paymentMethod}}','{{this.totalAmount}}','{{this.status}}' )"
+              class=" btn btn-danger">Cancel</button></td>
+
+
+          {{/if}}
+
+          {{/if}}
+
+
+
+
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  function removeOrder(orderId, userId, paymentMethod, totalAmount, status) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't to Cancel! this Order",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: `Yes`
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '/remove-order',
+          data: {
+            order: orderId,
+            user: userId,
+            paymentMethod: paymentMethod,
+            totalAmount: totalAmount,
+            status: status
+          },
+          method: 'post',
+          success: (response) => {
+            if (response.refund) {
+              Swal.fire({
+                title: 'Amount Creadeted to your account',
+                icon: 'success',
+                iconColor: '#32a852',
+                showCancelButton: false,
+                confirmButtonColor: '#11ba25',
+                confirmButtonText: `Ok`
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  location.reload()
+                }
+              })
+
+            } else {
+              location.reload()
+            }
+          }
+        })
+      }
+    })
+  }
+</script>

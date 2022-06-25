@@ -1,0 +1,110 @@
+
+<section class="container m-5">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-center">Add Coupon</h2>
+                <form action="/admin/add-coupon" method="post" id="form" enctype="multipart/form-data">
+
+                    <div class="form-group">
+                        <label for="">Coupon code</label>
+                        <input type="text" name="couponCode" class="form-control" id="coupon">
+                        <span id="errorCoupon" style="color:red;"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Start Date</label>
+                        <input type="date" name="startDate" class="form-control" id="startdate">
+                        <span id="errorStartDate" style="color:red;"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Expiry Date</label>
+                        <input type="date" name="endDate" class="form-control" id="enddate">
+                        <span id="errorEndDate" style="color:red;"></span>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="">Offer Percentage</label>
+                        <input type="number" name="offerPercent" class="form-control" id="offerpercent">
+                        <span id="errorOfferPercent" style="color:red;"></span>
+
+                    </div>
+                    <button type="submit" class="btn btn-success mt-4">Submit </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<script>
+    const coupon = document.getElementById("coupon");
+    const startdate = document.getElementById("startdate");
+    const enddate = document.getElementById("enddate");
+    const offerpercent = document.getElementById("offerpercent");
+    const form = document.getElementById("form")
+
+    const error1 = document.getElementById("errorCoupon");
+    const error2 = document.getElementById("errorStartDate")
+    const error3 = document.getElementById("errorEndDate");
+    const error4 = document.getElementById("errorOfferPercent")
+
+    form.addEventListener('submit', (e) => {
+        let message1 = []
+        let message2 = []
+        let message3 = []
+        let message4 = []
+
+        if (coupon.value === '' || coupon.value == null) {
+            message1.push('Please Enter the Coupon code')
+        } 
+        if (startdate.value === '' || startdate.value == null) {
+            message2.push('This field is required')
+        } if (enddate.value === '' || enddate.value === null) {
+            message3.push('This field is required')
+        }
+        if (offerpercent.value === '' || offerpercent.value === null) {
+            message4.push('Please Enter the Offer')
+        }
+
+
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join(' ')
+        }
+        else {
+            error1.innerText = ' '
+
+        } if (message2.length > 0) {
+            e.preventDefault();
+            error2.innerText = message2.join(' ')
+        }
+        else {
+            error2.innerText = ' '
+
+        } if (message3.length > 0) {
+            e.preventDefault();
+            error3.innerText = message3.join(' , ')
+        }
+        else {
+            error3.innerText = ' '
+
+        } if (message4.length > 0) {
+            e.preventDefault();
+            error4.innerText = message4.join(' ')
+        }
+        else {
+            error4.innerText = ' '
+
+        }
+
+
+
+    })
+
+
+
+</script>

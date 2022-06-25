@@ -1,0 +1,36 @@
+<div class="site-section block-3 site-blocks-2 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-7 site-section-heading text-center pt-4">
+        <h2>Ordered Products</h2>
+      </div>
+    </div>
+    <section>
+      <div class="container mt-5">
+        <div class="row">
+          {{#each products}}
+          <div class="col-md-3 p-3 " style="margin-left:1rem">
+            <div class="card" style="width: 16rem;height:22rem">
+              <img class="card-img-top" src="/product-images/{{this.product._id}}.jpg" alt="Card image cap">
+
+              <div class="card-body">
+                <h5 class="card-title text-center text-black">{{this.product.Name}}</h5>
+                <p class="card-text text-center text-success">{{this.product.Price}}</p>
+                <p class="card-text text-center text-primary">Quantity: {{this.quantity}}</p>
+              </div>
+            </div>
+
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+  </div>
+</div>

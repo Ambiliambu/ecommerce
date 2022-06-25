@@ -1,0 +1,95 @@
+<section class="container">
+  <div class="container p-5">
+
+    <table class="table mt-5" id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Address</th>
+          <th>Mobile</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Payment</th>
+          <th>Status</th>
+          <th>Option</th>
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each orders}}
+        <tr>
+          <th scope="row">{{this.date}}</th>
+          <td>
+            {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
+          </td>
+          <td>{{this.deliveryDetails.phone}}</td>
+          <td>{{this.totalAmount}}</td>
+          <td>{{this.paymentMethod}}</td>
+          <td>{{this.status}}</td>
+
+
+
+          {{#if cancel}}
+          <td>
+            <div class="dropdown show">
+              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{this.status}}
+              </a>
+          </td>
+          {{else}}
+          <td>
+            <div class="dropdown show">
+              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{this.status}}
+              </a>
+
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="/admin/change-status?id={{this._id}}&status=Cancelled">Canelled</a>
+                <a class="dropdown-item" href="/admin/change-status?id={{this._id}}&status=Shipped">Shipped</a>
+                <a class="dropdown-item" href="/admin/change-status?id={{this._id}}&status=Delivered">Delivered</a>
+                <a class="dropdown-item" href="/admin/change-status?id={{this._id}}&status=Placed">Placed</a>
+              </div>
+            </div>
+          </td>
+          {{/if}}
+
+
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function CancelOrder(event) {
+    var link = event.currentTarget.href;
+    event.preventDefault();
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete !",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: ` Yes `
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+      }
+    })
+  }
+
+</script>

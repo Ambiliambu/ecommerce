@@ -1,0 +1,173 @@
+<div class="container">
+
+    <div class="row justify-content-center ">
+        <div class="col-md-6 col-lg-5 mt-2">
+            <div class="wrap">
+                <div class="login-wrap p-md-2  ">
+                    <div class="d-flex">
+                        <div class="w-100 ">
+                            <h4 class="mb-4 text-center " style="color: #01d28e ">Signup</h4>
+                        </div>
+
+                    </div>
+                    <form action="/signup" method="post" class="signin-form" id="form">
+
+                        {{#if emlMobErr}}
+                        <p class="error text-center text-danger">{{emlMobErr}}</p>
+                        {{/if}}
+
+
+
+                        <div class="form-group ml-4">
+
+                            <input type="text" class="form-control " style="width:95%;" id="name" name="Name"
+                                placeholder="Name">
+                            <span id="errorName" style="color:red;"></span>
+
+                        </div>
+
+                        <div class="form-group ml-4">
+
+                            <input type="text" class="form-control " style="width:95%;" id="mobile" name="Mobile"
+                                placeholder="Mobile Number">
+
+                            <input type="text" value="{{refer}}" name="referedBy" class="form__input" placeholder=""
+                                hidden>
+
+
+                            <span id="errorMobile" style="color:red;"></span>
+
+                        </div>
+
+
+                        <div class="form-group ml-4 ">
+
+                            <input type="email" class="form-control " style="width:95%;" id="email" name="Email"
+                                placeholder="Email">
+                            <span id="errorEmail" style="color:red;"></span>
+
+                        </div>
+
+
+
+
+                        <div class="form-group  ml-4">
+                            <input id="password" type="password" style="width:95%;" class="form-control" name="Password"
+                                placeholder="Password">
+
+                            <span id="errorPassword" style="color: #ff0000;"></span>
+
+                        </div>
+                        <div class="form-group ml-4">
+                            <button type="submit" style="width:95%;"
+                                class="form-control btn btn-primary rounded submit px-3">SIGNUP</button>
+                        </div>
+
+                    </form>
+
+                    <p class="text-center">Already have account? <a href="/login">Login</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script>
+
+    const name = document.getElementById("name");
+    const mobile = document.getElementById("mobile");
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const nameformat = /^[A-Za-z]+$/
+    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const form = document.getElementById("form");
+
+    const error1 = document.getElementById("errorName")
+    const error2 = document.getElementById("errorMobile")
+    const error3 = document.getElementById("errorEmail");
+    const error4 = document.getElementById("errorPassword")
+
+
+
+
+    form.addEventListener('submit', (e) => {
+        let message1 = []
+        let message2 = []
+        let message3 = []
+        let message4 = []
+
+
+        if (name.value === '' || name.value == null) {
+            message1.push('Please Enter the Name')
+
+        }
+        else if (isNaN(name.value) === false) {
+            message1.push('Please Enter Valid Name')
+
+        } else if (name.value.length < 3) {
+            message1.push('Please Enter Valid Name')
+        } else if (!nameformat.test(name.value)) {
+            message1.push('Please Enter Valid Name')
+        }
+        if (mobile.value === '' || mobile.value == null) {
+            message2.push('Please Enter the Number')
+        }
+        else if (mobile.value.length < 10 || mobile.value.length > 10) {
+            message2.push('Please Enter Valid Number')
+
+        } else if (isNaN(mobile.value)) {
+            message2.push('Please Enter Valid Number')
+
+        }
+
+        if (email.value === '' || email.value == null) {
+            message3.push('Please Enter the  Email')
+        }
+        else if (!mailformat.test(email.value)) {
+            message3.push('Please  Enter Valid Email')
+        }
+        if (password.value === '' || password.value == null) {
+            message4.push('Please Enter the password')
+        }
+        else if (password.value.length < 6 || password.value.length > 6) {
+            message4.push('Password length must be 6')
+        }
+
+
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join(' , ')
+        } else {
+            error1.innerText = ' '
+
+        }
+        if (message2.length > 0) {
+            e.preventDefault()
+            error2.innerText = message2.join(' , ')
+        } else {
+            error2.innerText = ' '
+        }
+        if (message3.length > 0) {
+            e.preventDefault()
+            error3.innerText = message3.join(' , ')
+        }
+        else {
+            error3.innerText = ' '
+        }
+        if (message4.length > 0) {
+            e.preventDefault()
+            error4.innerText = message4.join(' , ')
+        } else {
+            error4.innerText = ' '
+        }
+
+    })
+
+</script>

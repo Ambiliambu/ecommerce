@@ -1,0 +1,557 @@
+<style>
+  .card {
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #f8f9fd;
+    background-clip: border-box;
+    border: 0 solid rgba(0, 0, 0, .125);
+    border-radius: .25rem;
+  }
+
+  .card-body {
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding: 1rem;
+  }
+
+  .gutters-sm {
+    margin-right: -8px;
+    margin-left: -8px;
+  }
+
+  .gutters-sm>.col,
+  .gutters-sm>[class*=col-] {
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
+  .mb-3,
+  .my-3 {
+    margin-bottom: 1rem !important;
+  }
+
+  .bg-gray-300 {
+    background-color: #e2e8f0;
+  }
+
+  .h-100 {
+    height: 100% !important;
+  }
+
+  .shadow-none {
+    box-shadow: none !important;
+  }
+</style>
+
+
+
+
+
+
+
+<div class="container mt-3">
+
+  <form id="checkout-form" action="/place-order" method="post">
+    <div class="row">
+
+
+      <div class="col-md-6 mb-5 mb-md-0">
+        <p class="h4 mb-3 text-black">Address Details</p>
+
+
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="name" name="name1" placeholder="" value="{{userEn.Name}}">
+            <span style="color:red;" id="nameErr"></span>
+
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="housename1" name="HouseName1" placeholder="House Name" value="">
+            <span style="color:red;" id="houseNameErr"></span>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+
+          <div class="col-md-12">
+            <input type="text" class="form-control" id="streetlocation1" name="StreetLocation1"
+              placeholder="Street Location*" value="">
+            <span style="color:red;" id="streetLocationErr"></span>
+
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="state1" name="State1" value="" placeholder="State*" required>
+            <span style="color:red;" id="stateErr"></span>
+
+          </div>
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="pin1" name="Pin1" value="" placeholder="Pincode*" required>
+            <span style="color:red;" id="pinErr"></span>
+
+          </div>
+        </div>
+
+        <div class="form-group row mb-5">
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="emailaddress1" name="EmailAddress1" placeholder="Email"
+              value="{{userEn.Email}}" required>
+            <span style="color:red;" id="emailAddressErr"></span>
+
+          </div>
+
+          <div class="col-md-6">
+            <input type="text" class="form-control" id="phone1" name="Phone1" placeholder="Phone Number"
+              value="{{userEn.Mobile}}">
+            <span style="color:red;" id="phoneNumberErr"></span>
+
+          </div>
+        </div>
+
+
+
+        <input type="text" name="userId" id="userid" value="{{userEn._id}}" hidden>
+        <input type="text" name="addId" id="id" value="{{user._id}}" hidden>
+
+
+
+       <div class="col-md-12">
+
+  {{#each existAddress.address}}
+  <h4 class="d-flex align-items-center mb-3">House address : {{inc @index}}</h4>
+  <small>{{this.HouseName}}, {{this.StreetLocation}},{{this.Pincode}},{{this.State}}</small>
+  <a onclick="chooseAddress('{{this._id}}','{{this.HouseName}}','{{this.StreetLocation}}','{{this.Pincode}}','{{this.State}}')"
+    class=" btn btn-danger ml-2" style="color: #fff;">Choose</a>
+
+  {{/each}}
+</div>
+
+
+
+      
+
+      </div>
+
+
+      <div class="col-md-6 ">
+        <div class="col-md-12">
+
+    
+
+
+          <form action="post">
+            <div>
+              <label for="" class="material-icons text-black mr-2 h4">Apply Coupon Get Discount</label>
+
+              <span><i class=" fa-fa-badge-percent" aria-hidden="true"></i></span><br>
+              <h6 id="success" style="color: green;"></h6>
+              <h6 id="err" style="color: red;"></h6>
+
+              <input type="text" id="couponCode" style="border-radius: 1px;border-style:dashed;" name="couponCode"
+                placeholder="Enter your Couponcode " aria-describedby="button-addon2">
+              <input type="text" id="total" name="total" value="{{total}}" hidden>
+              <button onclick="applyCoupon(event)" class="btn btn-primary btn-sm" id="button-addon2">Apply</button>
+            </div>
+          </form>
+
+
+								<form action="">
+									<div class="" style="">
+										<label for=""	class="material-icons text-black  h4">Use Wallet Amount : ₹<span	id="userWallet">{{wallet}}</span></label>
+										<h6 id="success1"	style="color: green;">	</h6>
+										<h6 id="err1"	style="color: red;">	</h6>
+										<h6	class="material-icons text-info "></h6>
+										<div style="display:flex">
+
+											<input 	value="{{wallet}}"	type="text" id="wallet" name="walletAmount"	placeholder=""	hidden>
+											<input 	type="text" id="applyWallet" name="walletAmount" placeholder="">
+											<a onclick="applyWallet()" class="btn btn-primary btn-sm">Apply</a>
+
+										</div>
+									</div>
+								</form>
+
+
+
+        </div>
+
+        <div class="col-md-12">
+          <p class="h4 mt-1 text-black">Pricing Table</p>
+          <table class="table site-block-order-table mb-2">
+
+
+
+            <tbody>
+
+              <tr>
+                <td class="text-black "><strong>Subtotal</strong></td>
+                <td class="text-black "><strong>Rs.{{total}}</strong></td>
+
+
+
+              </tr>
+              <tr style="display">
+                <td class="text-black " ><strong>You Pay</strong></td>
+                <td class="text-black "><strong id="price1">Rs.{{total}}</strong></td>
+
+              </tr>
+              <tr>
+                <td class="text-black "><strong>Total Price</strong></td>
+                <td class="text-black "><strong class="order-total">Rs.<span class="order-total" id="price">{{total}}</span></strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+
+          <label class="radio-inline ml-3">
+            <input type="radio" name="payment-method" value="COD" checked>
+            Cash on delivery
+          </label>
+
+
+
+
+          <label class="radio-inline ml-3">
+            <input type="radio" name="payment-method" value="Razorpay" checked>
+            Razorpay</label>
+
+
+
+          <label class="radio-inline ml-3">
+            <input type="radio" name="payment-method" value="Paypal" checked>
+            Paypal</label>
+
+
+
+
+
+          <button type="submit" class="btn btn-primary btn-lg py-3 btn-block" id="">Check Out</button>
+
+        </div>
+        </div>
+        </div>
+  </form>
+
+
+
+
+</div>
+
+
+
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+
+
+
+<script>
+  $("#checkout-form").submit((e) => {
+    e.preventDefault()
+    $.ajax({
+      url: '/place-order',
+      method: 'post',
+      data: $('#checkout-form').serialize(),
+      success: (response) => {
+        if (response.codSuccess) {
+          location.href = ' /order-success'
+        } else if (response.razorpaySuccess) {
+          razorpayPayment(response)
+
+        } else if (response) {
+          location.href = response.url
+
+        }
+      }
+    })
+ })
+
+
+
+
+  function razorpayPayment(order) {
+    var options = {
+      "key": "rzp_test_JW0ArFR8X9svKN", 
+      "amount": order.amount, 
+      "currency": "INR",
+      "name": "SHOPPERS",
+      "description": "Test Transaction",
+      "image": "https://example.com/your_logo",
+      "order_id": order.id, 
+      "handler": function (response) {
+
+
+        verifyPayment(response, order)
+      },
+      "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9999999999"
+      },
+      "notes": {
+        "address": "Razorpay Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      }
+    };
+
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
+
+  }
+  function verifyPayment(payment, order) {
+    $.ajax({
+      url: '/verify-payment',
+      data: {
+        payment,
+        order
+      },
+      method: 'post',
+      success: (response) => {
+        if (response.status) {
+          location.href = '/order-success'
+        } else {
+          alert('Payment failed')
+        }
+      }
+    })
+  } 
+</script>
+
+<script>
+  function chooseAddress(addId, houseName, city, pin, state) {
+
+    document.getElementById('housename1').value = houseName;
+    document.getElementById('streetlocation1').value = city;
+    document.getElementById('pin1').value = pin;
+    document.getElementById('state1').value = state;
+    document.getElementById('id').value = addId;
+
+
+  }
+
+
+  function applyCoupon(event) {
+
+    event.preventDefault();
+    let total = document.getElementById('total').value;
+    let couponCode = document.getElementById('couponCode').value;
+    let err = document.getElementById('err')
+    let success = document.getElementById('success')
+    if (couponCode == '' || couponCode == null) {
+      err.innerHTML = 'Enter the Code'
+    } else {
+
+      $.ajax({
+        url: '/apply-coupon',
+        data: {
+          total: total,
+          couponCode: couponCode
+        },
+        method: 'post',
+        success: (response) => {
+          if (response.couponSuccess) {
+
+
+            success.innerHTML = 'coupon Applyed Successfully'
+            document.getElementById('price').innerHTML = response.total;
+            document.getElementById('price1').innerHTML = response.total;
+            document.getElementById('total').value = response.total;
+            let save = response.oldTotal - response.total;
+
+
+
+          }
+          if (response.couponUsed) {
+            err.innerHTML = 'You Alredy used The Coupon'
+          }
+          if (response.couponExpired) {
+            err.innerHTML = 'Coupon Expired'
+          }
+          if (response.invalidCoupon) {
+
+            err.innerHTML = 'Invalid Coupon'
+          }
+
+
+
+        }
+      })
+    }
+
+
+  }
+
+
+
+
+
+	function applyWallet() {
+		let walletAmount = document.getElementById('wallet').value
+		let applyAmount = document.getElementById('applyWallet').value
+		let userWallet = document.getElementById('userWallet')
+		let price = document.getElementById('total').value
+
+		if (applyAmount == '' || applyAmount == null) {
+			document.getElementById('err1').innerHTML = 'Enter Amount'
+		} else {
+
+			$.ajax({
+				url: '/apply-wallet',
+				data: {
+					walletBalance: walletAmount,
+					applyAmount: applyAmount,
+					total: price
+
+				},
+				method: 'post',
+				success: (response) => {
+					if (response.noBalance) {
+						document.getElementById('err1').innerHTML = 'Wallet has no sufficient balance'
+					}
+					if (response.success) {
+						document.getElementById('success1').innerHTML = 'wallet Amount Applied'
+						newWallet = walletAmount - applyAmount
+						userWallet.innerHTML = newWallet
+
+
+						newPrice = price - applyAmount
+						document.getElementById('price1').innerHTML = parseInt(newPrice)
+						document.getElementById('price').innerHTML = parseInt(newPrice)
+						document.getElementById('total').value = parseInt(newPrice)
+					}
+				}
+
+			})
+		}
+
+
+
+
+	}
+
+
+
+
+
+
+</script>
+
+
+<script>
+  const name = document.getElementById('name1');
+  const hName = document.getElementById('housename1');
+  const strLocation = document.getElementById('streetlocation1');
+  const state = document.getElementById('state1');
+  const pin = document.getElementById('pin1');
+  const email = document.getElementById('emailaddress1');
+  const ph = document.getElementById('phone1');
+  const form = document.getElementById('checkout-form')
+
+
+  let error1 = document.getElementById('nameErr')
+  let error2 = document.getElementById('houseNameErr')
+  let error3 = document.getElementById('streetLocationErr')
+  let error4 = document.getElementById('stateErr')
+  let error5 = document.getElementById('pinErr')
+  let error6 = document.getElementById('emailAddressErr')
+  let error7 = document.getElementById('phoneNumberErr')
+
+  form.addEventListener('submit', (e) => {
+    let msg1 = [];
+    let msg2 = [];
+    let msg3 = [];
+    let msg4 = [];
+    let msg5 = [];
+    let msg6 = [];
+    let msg7 = [];
+
+    if (name.value =='' || name.value == null) {
+
+      msg1.push('Please Enter the Name');
+
+    } else if (name.value.length < 3) {
+
+      msg1.push('Please Enter a valid Name');
+    }
+    if (hName.value === '' || hName.value === null) {
+      msg2.push('Please Enter the house name')
+    }
+    if (strLocation.value === '' || strLocation.value === null) {
+      msg3.push('Please Enter the Street location')
+    }
+    if (state.value === '' || state.value === null) {
+      msg4.push('Please Enter the State ')
+    }
+    if (pin.value === '' || pin.value === null) {
+      msg5.push('Please Enter the Pincode')
+    }
+    else if (isNaN(pin.value)) {
+      msg5.push('Enter the Valid Pincode')
+    }
+    if (email.value === '' || email.value === null) {
+      msg6.push('Please Enter the Email')
+    }
+    if (ph.value === '' || ph.value === null) {
+      msg7.push('Please Enter the Phone number')
+    }
+
+    if (msg1.length > 0) {
+      e.preventDefault();
+
+      error1.innerText = msg1.join(' ')
+
+      if (msg2.length > 0) {
+        e.preventDefault();
+        error2.innerText = msg2.join(' ')
+      }
+
+      if (msg3.length > 0) {
+        e.preventDefault();
+        error3.innerText = msg3.join('  ')
+      }
+
+      if (msg4.length > 0) {
+        e.preventDefault();
+        error4.innerText = msg4.join(' ')
+      }
+    }
+    if (msg5.length > 0) {
+      e.preventDefault();
+      error5.innerText = msg5.join(' ')
+    }
+
+    if (msg6.length > 0) {
+      e.preventDefault();
+      error6.innerText = msg6.join(' ')
+    }
+
+    if (msg7.length > 0) {
+      e.preventDefault();
+      error7.innerText = msg7.join('  ')
+
+
+
+    }
+
+  })
+
+
+</script>
+
+
+

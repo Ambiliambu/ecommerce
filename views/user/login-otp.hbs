@@ -1,0 +1,85 @@
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 mt-4">
+            <div class="wrap">
+                <div class="login-wrap  p-md-5">
+                    <div class="d-flex">
+                        <div class="w-100">
+                            <h3 class="mb-4">Login with OTP</h3>
+                        </div>
+                    </div>
+                    <form action="/login-otp" method="POST" class="signin-form" id="form">
+                        {{#if blockErr}}
+                        <p class="error text-center text-danger">{{blockErr}}</p>
+
+                        {{/if}}
+
+                        {{#if noNumberErr}}
+                        <p class="error text-center text-danger">{{noNumberErr}}</p>
+                        {{/if}}
+                        <div class="form-group ml-4 ">
+
+                            <label class=" " style="color: #01d28e ;" for="mobile">Enter mobile number</label>
+                            <input type="text" class="form-control " style="width:95%;" id="mobile" name="Mobile">
+                            <span id="errorMobile" style="color:red;"></span>
+
+                        </div>
+
+                        <div class="form-group ml-4">
+                            <button type="submit" style="width:95%;"
+                                class="form-control btn btn-primary rounded submit px-3">Submit</button>
+                        </div>
+
+
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<script>
+
+    const mobile = document.getElementById("mobile");
+    const form = document.getElementById("form");
+
+    const error1 = document.getElementById("errorMobile");
+
+    form.addEventListener('submit', (e) => {
+        let message1 = [];
+
+        if (mobile.value === '' || mobile.value === null) {
+            message1.push('Please Enter the number')
+        }
+        else if (mobile.value.length < 10 || mobile.value.length > 10) {
+            message1.push('Please Enter Valid Number')
+
+        } else if (isNaN(mobile.value)) {
+            message1.push('Please Enter Valid Number')
+
+        }
+
+
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join(' ')
+
+        }
+
+
+
+    })
+
+</script>

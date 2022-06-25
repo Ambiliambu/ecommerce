@@ -1,0 +1,157 @@
+<div class="row no-gutters">
+    <div class="col-12  col-md-6 pl-5 mt-4 " id="cart">
+        <table class=" table table-bordered">
+            <thead>
+                <tr>
+                    <th class="product-thumbnail">Image</th>
+                    <th class="product-name">Product</th>
+                    <th class="product-price">Price</th>
+                    <th class="product-quantity">Quantity</th>
+                    <th class="product-remove">Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each products}}
+                <tr>
+                    <td class="">
+                        <img src="/product-images/{{this.product._id}}.jpg" style="height:5rem;width:7rem" alt="Image"
+                            class="img-fluid">
+                    </td>
+
+                    <td class=" ">
+                        <p class=" text-black ">{{this.product.Name}}</p>
+                    </td>
+                    <td>Rs.{{this.product.Price}}</td>
+
+                    <td class="">
+
+                        <button class="cart-item-count" style="border-radius:0.3rem ;border-width: .1em ;"
+                            onclick="changeQuantity('{{this._id}}' ,'{{this.product._id}}','{{../userId}}',-1)">-</button>
+                        <span id="{{this.product._id}}">{{this.quantity}}</span>
+                        <button class="cart-item-count " style="border-radius:0.3rem ;border-width:.1em ;"
+                            onclick="changeQuantity('{{this._id}}' ,'{{this.product._id}}','{{../userId}}',1)">+</button>
+
+                    </td>
+                    <td class="">
+                        <button class="btn btn-danger btn1"
+                            onclick="removeProduct('{{this._id}}','{{this.product._id}}')">X</button>
+
+                    </td>
+                </tr>
+
+                {{/each}}
+
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <div class="col-6 col-md-4 ml-5 mt-3 p-3 mb-3 ">
+        <h5 class="text-black  text-uppercase">Cart Totals</h5>
+
+        <div class="mt-2">
+            <span class="text-black">Total :</span>
+            <strong class="text-black"><span id="total"> Rs.{{totalValue}}</span></strong>
+        </div>
+
+        <div class="mt-4 ">
+            <a href="/place-order" class="btn btn-primary">Place Order</a>
+
+            <a href="/shop" class="btn btn-warning text-light ">Continue Shopping</a>
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+
+
+    function changeQuantity(cartId, proId, userId, count) {
+        let quantity = parseInt(document.getElementById(proId).innerHTML)
+        count = parseInt(count)
+
+        $.ajax({
+            url: '/change-product-quantity',
+            data: {
+
+                cart: cartId,
+                product: proId,
+                user: userId,
+                count: count,
+                quantity: quantity
+
+
+            },
+            method: 'post',
+            success: (response) => {
+                if (response.removeProduct) {
+                    location.reload()
+
+                } else {
+                    document.getElementById(proId).innerHTML = quantity + count
+                    document.getElementById('total').innerHTML = response.total
+                }
+            }
+        })
+    }
+
+
+
+
+
+    function removeProduct(cartId, proId) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't to remove the Product",
+            icon: 'warning',
+            iconColor: '#bf0f0f',
+            showCancelButton: true,
+            confirmButtonColor: '#11ba25',
+            cancelButtonColor: '#bf0f0f',
+            confirmButtonText: `Yes`
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    url: '/remove-cartproducts',
+                    data: {
+                        cart: cartId,
+                        product: proId
+                    },
+                    method: 'post',
+                    success: (response) => {
+                        if (response.removeProduct) {
+
+                            location.reload()
+                        }
+                    }
+                })
+            }
+        })
+
+
+    }
+
+
+
+
+
+
+</script>

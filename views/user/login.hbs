@@ -1,0 +1,99 @@
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 mt-4">
+            <div class="wrap">
+                <div class="login-wrap  p-md-2">
+                    <div class="d-flex">
+                        <div class="w-100">
+                            <h4 class="mb-4 text-center" style="color: #01d28e ">Login</h4>
+                        </div>
+
+
+                    </div>
+                    <form action="/login" method="POST" class="signin-form" id="form">
+                        {{#if loginErr}}
+                        <p class="error text-center text-danger">{{loginErr}}</p>
+                        {{/if}}
+                        {{#if blockErr}}
+                        <p class="error text-center text-danger">{{blockErr}}</p>
+
+                        {{/if}}
+                        <div class="form-group ml-4">
+
+                            <input type="email" class="form-control " style="width:95%;" id="email" placeholder="Email"
+                                name="Email">
+                            <span id="errorEmail" style="color:red;"></span>
+
+                        </div>
+                        <div class="form-group ml-4 ">
+                            <input id="password" type="password" style="width:95%;" class="form-control"
+                                placeholder="Password" name="Password">
+
+                            <span id="errorPassword" style="color: #ff0000;"></span>
+
+                        </div>
+                        <div class="form-group ml-4">
+                            <button type="submit" style="width:95%;"
+                                class="form-control btn btn-primary rounded submit px-3">LOGIN</button>
+                        </div>
+
+
+
+                        <input type="hidden">
+
+                        <p class="text-center"><a href="/login-otp">Login with otp</a></p>
+
+                    </form>
+
+                    <p class="text-center">Create new account? <a href="/signup">Sign-Up</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    const email = document.getElementById("email");
+    const password = document.getElementById("password");
+    const form = document.getElementById("form");
+
+    const error1 = document.getElementById("errorEmail");
+    const error2 = document.getElementById("errorPassword")
+
+    form.addEventListener('submit', (e) => {
+        let message1 = []
+        let message2 = []
+
+        if (email.value === '' || email.value == null) {
+            message1.push('Please enter the Email')
+        }
+
+        if (password.value === '' || password.value == null) {
+            message2.push('Please enter the Password')
+        }
+        else if (password.value.length < 6 || password.value.length > 6) {
+            message2.push('Password length must be 6')
+        }
+        if (message1.length > 0) {
+            e.preventDefault();
+            error1.innerText = message1.join(' , ')
+        }
+        else {
+            error1.innerText = ' '
+        }
+        if (message2.length > 0) {
+            e.preventDefault()
+            error2.innerText = message2.join(' , ')
+        }
+        else {
+            error2.innerText = ' '
+        }
+
+
+    })
+
+</script>

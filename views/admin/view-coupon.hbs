@@ -1,0 +1,76 @@
+<section class="container">
+  <div class="container p-5">
+    <div class="row m-2">
+      <a href="/admin/add-coupon" class="btn btn-success  ml-auto ">Add Coupon</a>
+    </div>
+    <table class="table mt-5" id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">No.</th>
+          <th scope="col">Coupon Code</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Offer Percentage</th>
+          <th scope="col">Option</th>
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+        {{#each coupons}}
+        <tr>
+          <th scope="row">{{inc @index}}</th>
+          <td>{{this.couponCode}}</td>
+          <td>{{this.startDate}}</td>
+          <td>{{this.endDate}}</td>
+          <td>{{this.offerPercent}}%</td>
+          <td>
+
+
+            <a class="btn btn-danger" onclick="deleteCoupon(event)" name="{{this.couponCode}}"
+              href="/admin/delete-coupon?id={{this._id}}">Delete</a>
+
+          </td>
+
+
+        </tr>
+        {{/each}}
+
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  function deleteCoupon(event) {
+
+    var name = event.currentTarget.name;
+    var link = event.currentTarget.href;
+    event.preventDefault();
+
+
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You want to delete  " + name + "!",
+      icon: 'warning',
+      iconColor: '#bf0f0f',
+      showCancelButton: true,
+      confirmButtonColor: '#11ba25',
+      cancelButtonColor: '#bf0f0f',
+      confirmButtonText: ` Yes `
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        window.location = link;
+      } else {
+
+        return false;
+
+      }
+    })
+  }
+</script>

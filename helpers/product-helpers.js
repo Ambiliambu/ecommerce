@@ -87,7 +87,7 @@ module.exports={
          let product=await db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)})
          resolve(product)
         
-        })
+        }) 
       },
 
      updateUserblock:(userId)=>{

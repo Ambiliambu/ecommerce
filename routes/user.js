@@ -742,14 +742,6 @@ router.post('/verify-payment',(req,res)=>{
 
 
 
-
-
-router.get('/shop',verifyLogin,(req,res)=>{
-  let userEn=req.session.user
-  res.render('user/shop',{user:true,userEn})
-})
-
-
 /*single-pro*/
 
 router.get('/single-product',verifyLogin,async(req,res)=>{

@@ -157,8 +157,20 @@
               <h6 id="success" style="color: green;"></h6>
               <h6 id="err" style="color: red;"></h6>
 
-              <input type="text" id="couponCode" style="border-radius: 1px;border-style:dashed;" name="couponCode"
-                placeholder="Enter your Couponcode " aria-describedby="button-addon2">
+             
+                <select class="selectpicker product-add-catagory" style="height:40px;border-radius: 1px;border-style:dashed;" name="couponCode"
+                id="couponCode">
+                <option value="" style="border-style:none">Select a Coupon</option>
+
+                {{#each coupon}}
+                <option value="{{this.couponCode}}">{{this.couponCode}}</option>
+                {{/each}}
+                </select>
+
+
+
+
+
               <input type="text" id="total" name="total" value="{{total}}" hidden>
               <button onclick="applyCoupon(event)" class="btn btn-primary btn-sm" id="button-addon2">Apply</button>
             </div>

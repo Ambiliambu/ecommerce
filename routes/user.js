@@ -392,9 +392,11 @@ router.get('/place-order',verifyLogin, async (req,res)=>{
    let User = await userHelpers.findUserWallet(userEn._id);
 
    wallet = User.wallet;
+   let coupon = await productHelpers.getAllCoupon();
+
  
     
-    res.render('user/place-order',{user:true,userEn,total,existAddress,cartCount,wallet,wishCount})
+    res.render('user/place-order',{user:true,userEn,total,existAddress,cartCount,wallet,wishCount,coupon})
  })     
 
 

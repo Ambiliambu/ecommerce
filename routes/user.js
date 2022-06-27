@@ -81,8 +81,14 @@ router.get('/', async function(req, res, next) {
 
     let coupon = await productHelpers.getAllCoupon();
     let couponCod = coupon[0];
-
+if(req.session.user){
     res.render('user/view-products',{products,user:true,userEn,cartCount,categories,couponCod,wishCount})
+}else{
+
+  res.render('user/view-products',{products,user:true,userEn,categories,footer:true})
+  
+
+}
 
   })
 })

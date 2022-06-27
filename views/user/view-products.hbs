@@ -73,7 +73,9 @@
             <div class="item">
               <div class="block-4 text-center " style="height:30rem">
                 <figure class="block-4-image">
+                <a href='/single-product?id={{this._id}}'>                   
                   <img src="/product-images/{{this._id}}.jpg" alt="Image placeholder" class="img-fluid">
+                </a>
                 </figure>
 
                 {{#if this.wish}}
@@ -120,37 +122,33 @@
     </div>
   </div>
 
-
+ {{#if footer}}
   <footer class="site-footer border-top mt-5">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 mb-5 mb-lg-0">
           <div class="row">
             <div class="col-md-12">
-              <h3 class="footer-heading mb-4">Navigations</h3>
+              <h3 class="footer-heading mb-4 h4 text-success">SHOPPERS</h3>
             </div>
             <div class="col-md-6 col-lg-4">
               <ul class="list-unstyled">
-                <li><a href="#">Sell online</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Shopping cart</a></li>
-                <li><a href="#">Store builder</a></li>
+                <li><a href="/">Go to Home</a></li>
+                <li><a href="/">Help</a></li>
               </ul>
             </div>
             <div class="col-md-6 col-lg-4">
               <ul class="list-unstyled">
-                <li><a href="#">Mobile commerce</a></li>
-                <li><a href="#">Dropshipping</a></li>
-                <li><a href="#">Website development</a></li>
+                <li><a href="/login">Order details</a></li>
+                <li><a href="/login">Profile details</a></li>
               </ul>
             </div>
             <div class="col-md-6 col-lg-4">
               <ul class="list-unstyled">
-                <li><a href="#">Point of sale</a></li>
-                <li><a href="#">Hardware</a></li>
-                <li><a href="#">Software</a></li>
+                <li><a href="/login">Wishlist</a></li>
+                <li><a href="/login">Cart details</a></li>
               </ul>
-            </div>
+            </div> 
           </div>
         </div>
 
@@ -158,9 +156,9 @@
           <div class="block-5 mb-5">
             <h3 class="footer-heading mb-4">Contact Info</h3>
             <ul class="list-unstyled">
-              <li class="address">203 Fake St. Mountain View, San Francisco, California, USA</li>
-              <li class="phone"><a href="tel://23923929210">+2 392 3929 210</a></li>
-              <li class="email">emailaddress@domain.com</li>
+              <li class="address">Padamugal-Kakkanad, Kochi, Ernakulam</li>
+              <li class="phone"><a href="">+91 98464774994</a></li>
+              <li class="email">shoppers@gmail.com</li>
             </ul>
           </div>
 
@@ -170,6 +168,8 @@
 
     </div>
   </footer>
+  {{/if}}
+  
 
 
 </div>

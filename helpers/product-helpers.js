@@ -117,6 +117,19 @@ module.exports={
     getAllOrders:()=>{
         return new Promise(async (resolve,reject)=>{
             let orders=await db.get().collection(collection.ORDER_COLLECTION).find().sort({$natural:-1}).toArray()
+            /*or */
+
+            orders.forEach((element)=>{
+                if(element.status=='failed'){
+                    element.failed=true
+                }else{
+                    element.failed=false
+
+                }
+            })
+          
+
+
             resolve(orders)
         })
     },

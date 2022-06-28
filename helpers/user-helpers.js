@@ -12,6 +12,7 @@ var objectId=require('mongodb').ObjectId
 let moment=require('moment')
 const Razorpay= require('razorpay')
 const { localeData } = require('moment')
+const { order } = require('paypal-rest-sdk')
 var instance = new Razorpay({
     key_id: 'rzp_test_JW0ArFR8X9svKN',
     key_secret: 'HFpHyxvtUgoLUOCEJ1qq93mo',
@@ -397,6 +398,16 @@ module.exports={
             return new Promise(async(resolve,reject)=>{
                 let orders=await db.get().collection(collection.ORDER_COLLECTION)
                 .find({userId:objectId(userId)}).sort({$natural:-1}).toArray()
+                
+                orders.forEach((element)=>{
+                    if(element.status=='failed'){
+                        element.failed=true
+                    }else{
+                        element.failed=false
+
+                    }
+                })
+
                 resolve(orders)
             })
         },

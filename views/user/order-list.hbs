@@ -28,12 +28,13 @@
           <td>{{this.paymentMethod}}</td>
           <td>{{this.status}}</td>
 
-          {{#if this.cancel}}
+          {{#if this.failed}}
+          <td><a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a></td>
+    
+          {{else if this.cancel}}
           <td><a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a></td>
 
-
-          {{else}}
-          {{#if this.delivery}}
+          {{else if this.delivery}}
           <td><a class=" btn" style="width:max-content;">Return</a></td>
           <td> <a href="/view-orders/{{this._id}}" class="btn btn-success ">View</a> </td>
 
@@ -47,9 +48,8 @@
 
           {{/if}}
 
-          {{/if}}
-
-
+          
+          
 
 
         </tr>

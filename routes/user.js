@@ -697,10 +697,7 @@ router.get('/order-list',verifyLogin,async(req,res)=>{
   let orders=[];
   let userEn=req.session.user;
   orders=await userHelpers.getUserOrders(req.session.user?._id)
-  if(orders.status=='failed'){
-    orders.failed=true
-  }
-
+  
 
 
 

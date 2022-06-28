@@ -28,15 +28,17 @@
           <td>{{this.status}}</td>
 
 
-
-          {{#if cancel}}
+          {{#if failed}}
+             <td>
+            <div class="dropdown show">
+              
+          </td>
+          {{else if cancel}}
           <td>
             <div class="dropdown show">
-              <a class="btn btn-dark dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {{this.status}}
-              </a>
+            
           </td>
+          
           {{else}}
           <td>
             <div class="dropdown show">

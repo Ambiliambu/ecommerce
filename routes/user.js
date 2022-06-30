@@ -487,8 +487,8 @@ router.get('/place-order',verifyLogin, async (req,res)=>{
                     payment_method: "paypal"
                 },
                 redirect_urls: {
-                    return_url: "http://localhost:3009/success",
-                    cancel_url: "http://localhost:3009/cancel"
+                    return_url: "http://ambili.live/success",
+                    cancel_url: "http://ambili.live/cancel"
                 },
                 transactions: [{
                     item_list: {
@@ -593,7 +593,7 @@ router.get('/user-details',verifyLogin,async(req,res)=>{
     userHelpers.userFind(userEn._id).then((user1) => {
       let refer = user1.refer;
       let wallet = user1.wallet;
-      let referalLink = "http://localhost:3009/signup?refer=" + refer;
+      let referalLink = "http://ambili.live/signup?refer=" + refer;
 
     res.render('user/user-details',{user:true,userEn,userData,cartCount,referalLink,wallet,wishCount})
       

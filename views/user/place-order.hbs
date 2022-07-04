@@ -160,10 +160,12 @@
              
                 <select class="selectpicker product-add-catagory" style="height:40px;border-radius: 1px;border-style:dashed;" name="couponCode"
                 id="couponCode">
-                <option value="" style="border-style:none">Select a Coupon</option>
+                <option value="" style="border-style:none;color: red;">Select a Coupon</option>
 
                 {{#each coupon}}
-                <option value="{{this.couponCode}}">{{this.couponCode}}</option>
+                <option value="{{this.couponCode}}" style="color: red;"> {{this.couponCode}} ::
+                  <h6> will get {{offerPercent}} %</h6>
+                </option>
                 {{/each}}
                 </select>
 
@@ -173,6 +175,7 @@
 
               <input type="text" id="total" name="total" value="{{total}}" hidden>
               <button onclick="applyCoupon(event)" class="btn btn-primary btn-sm" id="button-addon2">Apply</button>
+              
             </div>
           </form>
 

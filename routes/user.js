@@ -698,8 +698,7 @@ router.get('/order-list',verifyLogin,async(req,res)=>{
   let userEn=req.session.user;
   orders=await userHelpers.getUserOrders(req.session.user?._id)
   
-
-
+ 
 
   if(orders.length>0){
     res.render('user/order-list',{user:true,userEn,orders,cartCount,wishCount})
@@ -716,7 +715,6 @@ router.get('/order-list',verifyLogin,async(req,res)=>{
 router.get('/view-orders/:id',verifyLogin,async(req,res)=>{
 
   let products=await userHelpers.getOrderProducts(req.params.id)
-
    let userEn=req.session.user;
   res.render('user/view-orders',{user:true,userEn,products})
 

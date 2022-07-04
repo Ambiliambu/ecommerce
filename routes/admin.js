@@ -266,6 +266,7 @@ router.get('/delete-category', verifyAdmin, (req, res) => {
 
 router.get('/view-orders',verifyAdmin,(req, res) => {
   productHelpers.getAllOrders().then((orders) => {
+    
     res.render('admin/view-orders', { admin: true, adminlogin: true, orders })
   })
 

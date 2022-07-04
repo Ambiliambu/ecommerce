@@ -5,6 +5,8 @@
                 <tr>
                     <th class="product-thumbnail">Image</th>
                     <th class="product-name">Product</th>
+                    <th class="product-actual-price">Actual Price</th>
+                    <th class="offer">Offer Percentage</th>
                     <th class="product-price">Price</th>
                     <th class="product-quantity">Quantity</th>
                     <th class="product-remove">Remove</th>
@@ -21,7 +23,16 @@
                     <td class=" ">
                         <p class=" text-black ">{{this.product.Name}}</p>
                     </td>
-                    <td>Rs.{{this.product.Price}}</td>
+                   {{#if this.product.offer}}
+                    <td>₹{{this.product.actualPrice}}</td>
+                    <td>{{this.product.offerPer}}%</td>
+                    <td>₹{{this.product.Price}}</td>
+                    {{else}}                    
+                     <td>₹{{this.product.Price}}</td>
+                    <td>No offer</td>
+                    <td>₹{{this.product.Price}}</td>                    
+                     {{/if}}
+
 
                     <td class="">
 
@@ -54,7 +65,28 @@
         <h5 class="text-black  text-uppercase">Cart Totals</h5>
 
         <div class="mt-2">
-            <span class="text-black">Total :</span>
+            <h6 class="text-black">Details:</h6>
+        <table style="color: black;">
+            <thead>
+                <tr>
+                    <th class="product-name">Product</th>
+                    <th class="product-price " style="padding-left: 50px;">Total</th>
+                </tr>
+            </thead>
+   
+            <tbody>
+                {{#each products}}
+                <tr>
+               <td>{{this.product.Name}}</td>
+               <td style="padding-left: 50px;">{{this.product.Price}} x {{this.quantity}}=₹{{this.eachPro}}</td>
+            </tr>  
+            {{/each}}    
+            </tbody>
+     </table>
+        </div>
+
+        <div class="mt-2">
+            <span class="text-black">Total Amount :</span>
             <strong class="text-black"><span id="total"> Rs.{{totalValue}}</span></strong>
         </div>
 

@@ -209,7 +209,9 @@ module.exports={
                     
                 ]).toArray()  
                 resolve( cartItems)
-               
+               cartItems.forEach((element)=>{
+                element.eachPro=element.quantity * element.product.Price;
+               })
             })
         },
 

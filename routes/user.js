@@ -327,6 +327,8 @@ router.get('/cart',verifyLogin,async(req,res)=>{
   let wishCount=await userHelpers.getWishCount(req.session.user._id);
 
   let products=await userHelpers.getCartProducts(req.session.user._id)
+
+
   let userEn = req.session.user
   let userId= req.session.user._id
   let totalValue=0;

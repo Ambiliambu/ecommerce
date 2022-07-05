@@ -61,8 +61,8 @@
             <tr>
 
               <th>Date</th>
-              <th>User Name</th>
-              <th>Address</th>
+              <th></th>
+              <th>User Details</th>
               <th>Payment</th>
               <th>Amount</th>
               <th>Status</th>
@@ -72,8 +72,9 @@
             {{#each orders}}
             <tr>
               <td>{{this.date}}</td>
-              <td>{{this.deliveryDetails.name}}</td>
+              <td></td>
               <td>
+                Name:{{this.deliveryDetails.name}}<br>
                 {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
               </td>
               <td>{{this.paymentMethod}}</td>

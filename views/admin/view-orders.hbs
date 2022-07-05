@@ -6,10 +6,12 @@
         <tr>
           <th scope="col">Date</th>
           <th scope="col">Address</th>
-          <th>Mobile</th>
-          <th scope="col">Amount</th>
-          <th scope="col">Payment</th>
+          <th>Actual Amount</th>
+          <th>Discount</th>
+          <th scope="col">Pay Amount</th>
+          <th>Payment</th>
           <th>Status</th>
+          <th>Product Details</th>
           <th>Option</th>
 
 
@@ -20,12 +22,27 @@
         <tr>
           <th scope="row">{{this.date}}</th>
           <td>
-            {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
+            {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}<br>
+            ph:{{this.deliveryDetails.phone}}
           </td>
-          <td>{{this.deliveryDetails.phone}}</td>
-          <td>{{this.totalAmount}}</td>
+
+        <td>₹{{this.oldTotal}}</td>
+
+          {{#if this.noOffer}}
+          <td>No offer</td>
+        {{else if this.couponStatus}}
+          <td>Coupon:<span style="font-size:14px;">₹{{this.couponDiscount}}</span></td>
+        {{else if  this.walletStatus}}
+            <td>Wallet:<span style="font-size:14px;">₹{{this.walletDiscount}}</span></td>
+        {{else if /admin/view-orderssthis.CandW}}
+          <td>Coupon:<span style="font-size:14px;">₹{{this.couponDiscount}}</span></td>
+          <td>Wallet:<span style="font-size:14px;">₹{{this.walletDiscount}}</span></td>      
+        {{/if}}
+
+          <td>₹{{this.totalAmount}}</td>
           <td>{{this.paymentMethod}}</td>
           <td>{{this.status}}</td>
+          <td><a href="/admin/view-orderss/{{this._id}}" class="btn btn-success ">View</a></td>
 
 
           {{#if failed}}

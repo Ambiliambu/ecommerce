@@ -1,0 +1,40 @@
+<div class="site-section block-3 site-blocks-2 m-5 bg-light" style="padding-left:5rem;">
+
+        <h4>Ordered Products</h4>
+    <section>
+      <div class="container mt-5">
+        <div class="row">
+          {{#each products}}
+          <div class="col-md-3 p-3 " style="">
+
+            <div class="card" style="height:22rem ">
+
+              <img class="card-img-top" src="/product-images/{{this.product._id}}.jpg" alt="Card image cap">
+
+              <div class="card-body">
+                
+                <h5 class="card-title text-center text-black">{{this.product.Name}}</h5>
+                {{#if this.product.offer}}
+                   <h6 class="card-text text-center text-danger">{{this.product.offerPer}}%</h6>                                
+                   <h6 class="card-text text-center " style="color: green;">₹{{this.product.Price}}
+                   <del class="product-old-price text-center text-secondary"> ₹{{this.product.actualPrice}}</del></h6>
+                {{else}} 
+                   <h6 class="card-text text-center " style="color: green;" >₹{{this.product.Price}}</h6>
+                {{/if}}
+                <p class="card-text text-center text-primary">Quantity: {{this.quantity}}</p>
+              </div>
+            </div>
+
+          </div>
+          {{/each}}
+
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+</div>

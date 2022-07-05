@@ -2,6 +2,8 @@ var express = require('express');
 const res = require('express/lib/response');
 var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
+const userHelpers=require('../helpers/user-helpers')
+
 let moment=require('moment')
 
 let Credential = {
@@ -272,9 +274,17 @@ router.get('/view-orders',verifyAdmin,(req, res) => {
 })
 
 
+router.get('/view-orderss/:id',verifyAdmin,async(req,res)=>{
+
+  let products=await userHelpers.getOrderProducts(req.params.id)
+  res.render('admin/view-orderss',{admin: true, adminlogin: true,products})
+
+
+})
+
+
+
 /* change-orders-status*/
-
-
 
 
 router.get('/change-status',verifyAdmin,(req,res)=>{

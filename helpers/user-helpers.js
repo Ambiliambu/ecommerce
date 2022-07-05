@@ -323,7 +323,7 @@ module.exports={
               var dates=moment(date).format('YYYY-MM-DD');
 
 
-                let status=order['payment-method']==='COD'?'placed':'failed'
+                let status=order['payment-method']==='COD'?'Placed':'Failed'
 
                 let cStatus=false;
                 let noOffer=false;
@@ -402,7 +402,7 @@ module.exports={
                 .find({userId:objectId(userId)}).sort({$natural:-1}).toArray()
                 
                 orders.forEach((element)=>{
-                    if(element.status=='failed'){
+                    if(element.status=='Failed'){
                         element.failed=true
                     }else{
                         element.failed=false
@@ -614,7 +614,7 @@ module.exports={
                   .updateOne({_id:objectId(orderId)},
                   {
                       $set:{
-                          status:'placed'
+                          status:'Placed'
                       }
                   }
                   ).then(()=>{

@@ -55,34 +55,85 @@
     <div class="col-12 col-sm-6 col-md-8">
       <div class="container p-4">
 
-        <table id="Table" class="" style="">
+        <table id="Table" class="Table" style="">
           <thead>
             <div style="color:#494ca2"> Orders</div>
             <tr>
-
+              <th>Sl.</th>
               <th>Date</th>
-              <th></th>
               <th>User Details</th>
-              <th>Payment</th>
-              <th>Amount</th>
-              <th>Status</th>
+              <th>Actual Amount</th>
+              <th>Discounts</th>
+              <th>Pay Amount</th>            
+              <th>Payment & Status</th>
             </tr>
           </thead>
           <tbody>
             {{#each orders}}
             <tr>
+              <td>{{inc @index}}</td>
               <td>{{this.date}}</td>
-              <td></td>
+              
               <td>
                 Name:{{this.deliveryDetails.name}}<br>
                 {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}
               </td>
-              <td>{{this.paymentMethod}}</td>
-              <td>{{this.totalAmount}}</td>
-              <td>{{this.status}}</td>
+              <td>₹{{this.oldTotal}}</td>
+
+          {{#if this.noOffer}}
+          <td>No offer</td>
+        {{else if this.couponStatus}}
+          <td>Coupon:<span style="font-size:14px;">₹{{this.couponDiscount}}</span></td>
+        {{else if  this.walletStatus}}
+            <td>Wallet:<span style="font-size:14px;">₹{{this.walletDiscount}}</span></td>
+        {{else if /admin/view-orderssthis.CandW}}
+          <td>Coupon:<span style="font-size:14px;">₹{{this.couponDiscount}}</span></td>
+          <td>Wallet:<span style="font-size:14px;">₹{{this.walletDiscount}}</span></td>      
+        {{/if}}
+
+          <td>₹{{this.totalAmount}}</td>
+              <td>{{this.paymentMethod}} : {{this.status}}</td>
+
+
             </tr>
             {{/each}}
 
+          </tbody>
+        </table>
+        <table id="Table" class="Table mt-5" >
+          <thead>
+              <tr>
+                <th>Sl.</th>
+               <th style="padding-left: 5rem;">Product Name</th>
+               <th style="padding-left: 7rem;"> Offer</th>
+               <th style="padding-left: 3rem;">Amount Details</th>
+
+               <th style="padding-left: 7rem;">Quantity</th>
+               
+              </tr>
+          </thead>
+          <tbody>
+
+            {{#each order}}
+              <tr>
+                
+               
+               
+               <td>{{inc @index}}</td>
+               <td style="padding-left: 5rem;" >{{this.pro.Name}}</td>
+               
+                {{#if this.pro.offer}}
+                <td style="padding-left: 7rem;">   Offer:{{this.pro.offerPer}}% </td>
+                 <td style="padding-left: 3rem;">    ₹{{this.pro.Price}} , <del> ₹{{this.pro.actualPrice}}</del></td>                   
+                   
+                {{else}} 
+                <td style="padding-left: 7rem;">  No Offer</td>
+                 <td style="padding-left: 3rem;">   ₹{{this.pro.Price}}</td>
+                {{/if}}
+                </td>
+               <td style="padding-left: 7rem;">{{this.quantity}}</td>
+              </tr>
+             {{/each}}
           </tbody>
         </table>
       </div>
@@ -94,8 +145,8 @@
 
 
 
-    <div class="col-6 col-md-4">
-      <div class="row ml-5" style="margin-top:11rem ">
+    <div class="col-6 col-md-2">
+      <div class="row ml-5 " style="margin-top:11rem ;">
 
         <div class="col-sm-6  ">
           <div class="card  " style="width: 255px;">
@@ -132,6 +183,7 @@
         </div>
 
       </div>
+      
     </div>
 
 
@@ -149,7 +201,7 @@
 
 <script>
   $(document).ready(function () {
-    $('#Table').DataTable({
+    $('.Table').DataTable({
       dom: 'Bfrtip',
       buttons: [
         'copy', 'csv', 'excel', 'pdf', 'print'

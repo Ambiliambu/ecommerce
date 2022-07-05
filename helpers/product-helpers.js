@@ -6,6 +6,7 @@ var objectId=require('mongodb').ObjectId
 let moment=require('moment')
 const res = require('express/lib/response')
 const { response } = require('../app')
+const { promise } = require('bcrypt/promises')
 
 
 module.exports={
@@ -117,22 +118,63 @@ module.exports={
     getAllOrders:()=>{
         return new Promise(async (resolve,reject)=>{
             let orders=await db.get().collection(collection.ORDER_COLLECTION).find().sort({$natural:-1}).toArray()
-            /*or */
+            
 
             orders.forEach((element)=>{
-                if(element.status=='failed'){
+                if(element.status=='Failed'){
                     element.failed=true
                 }else{
                     element.failed=false
 
                 }
             })
-          
-
+           
+       
 
             resolve(orders)
         })
     },
+    getOrderProduct:()=>{
+        return new Promise(async(resolve,reject)=>{
+       let order=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
+        {
+            $unwind:"$products"
+        },
+        {
+            $project:{
+                item:'$products.item',
+                quantity:'$products.quantity'
+             }
+        },
+        {
+            $lookup:{
+                from:collection.PRODUCT_COLLECTION,
+                localField:'item',
+                foreignField:'_id',
+                as:'pro'
+            }
+        },
+        {
+            $project:{
+                quantity:1,pro:{ $arrayElemAt:["$pro",0]}
+            }
+        }
+        
+       ]).toArray()
+        resolve(order)
+        
+        })
+
+    },
+
+
+
+
+
+
+
+
+
     getAllOrder:(startDate,endDate)=>{
                  
         let end= moment(endDate).format('YYYY-MM-DD')
@@ -267,8 +309,8 @@ module.exports={
         let end= moment(today).format('YYYY-MM-DD')
         let start=moment(end).subtract(30,'days').format('YYYY-MM-DD')
         let orderShipped= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:"Shipped"}).toArray()
-        let orderPlaced= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:"placed"}).toArray()
-        let orderPending= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status: 'failed'}).toArray()
+        let orderPlaced= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:"Placed"}).toArray()
+        let orderPending= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status: 'Failed'}).toArray()
 
         let orderTotal = await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end}}).toArray()
         let cancelOrder=await db.get().collection(collection.ORDER_COLLECTION).find({status:'Cancelled',date:{$gte:start,$lte:end}}).toArray()
@@ -280,7 +322,7 @@ module.exports={
         let deliveredOrder=await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:'Delivered'}).toArray()
         let totalAmount=await db.get().collection(collection.ORDER_COLLECTION).aggregate([
          {
-            $match:{$and:[{status:{$ne:'Cancelled'}},{status:{$ne:'failed'}}]}                             
+            $match:{$and:[{status:{$ne:'Cancelled'}},{status:{$ne:'Failed'}}]}                             
          },
           {
             $group:{
@@ -337,8 +379,8 @@ module.exports={
           let start=moment(startDate).format('YYYY-MM-DD')
 
           
-          let orderSuccess= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:{ $ne: 'failed',$ne:'Cancelled' }}).toArray()
-          let orderPending= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status: 'failed'}).toArray()
+          let orderSuccess= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:{ $ne: 'Failed',$ne:'Cancelled' }}).toArray()
+          let orderPending= await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status: 'Failed'}).toArray()
           let orderTotal = await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end}}).toArray()
           let cancelOrder=await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:'Cancelled'}).toArray()
           let deliveredOrder=await db.get().collection(collection.ORDER_COLLECTION).find({date:{$gte:start,$lte:end},status:'Delivered'}).toArray()

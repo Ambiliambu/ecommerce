@@ -4,7 +4,8 @@ var router = express.Router();
 const productHelpers = require('../helpers/product-helpers')
 const userHelpers=require('../helpers/user-helpers')
 
-let moment=require('moment')
+let moment=require('moment');
+const async = require('hbs/lib/async');
 
 let Credential = {
   email: "admin123@gmail.com",
@@ -361,7 +362,7 @@ router.post('/date-report',(req,res)=>{
 
   productHelpers.dateReport(startDate,endDate).then((data)=>{
     productHelpers.getAllOrder(startDate,endDate).then ((orders)=>{ 
-
+   
     res.render('admin/sales-report',{admini:true,adminlogin:true,data,orders})
     })
   })
@@ -390,10 +391,17 @@ router.get('/limit-report',verifyAdmin,(req,res)=>{
 
 router.get('/sales-report',verifyAdmin ,(req,res)=>{
    productHelpers.monthlyReport().then((data)=>{
-   productHelpers.getAllOrders().then((orders)=>{ 
+   productHelpers.getAllOrders().then((orders)=>{
+    
+   
+  
+    productHelpers.getOrderProduct().then((order)=>{
 
-    res.render('admin/sales-report',{admin: true, adminlogin: true, data,orders})
+    res.render('admin/sales-report',{admin: true, adminlogin: true, data,orders,order})
+       
+    })
 
+   
    })
 
   })

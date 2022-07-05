@@ -5,7 +5,7 @@
       <thead>
         <tr>
           <th scope="col">Date</th>
-          <th scope="col">Address</th>
+          <th scope="col">User Details</th>
           <th>Actual Amount</th>
           <th>Discount</th>
           <th scope="col">Pay Amount</th>
@@ -22,6 +22,7 @@
         <tr>
           <th scope="row">{{this.date}}</th>
           <td>
+             Name:{{this.deliveryDetails.name}}<br>
             {{this.deliveryDetails.houseName}},{{this.deliveryDetails.streetLocation}},{{this.deliveryDetails.pin}},{{this.deliveryDetails.state}}<br>
             ph:{{this.deliveryDetails.phone}}
           </td>

@@ -33,13 +33,17 @@ module.exports={
        return new Promise((resolve,reject)=>{
            db.get().collection(collection.PRODUCT_COLLECTION).deleteOne({_id:objectId(prodId)}).then((response)=>{
                resolve(response)
-           })
+           }).catch((err)=>{
+            reject(err)
+        })
        })
     },
     getProductDetails:(proId)=>{
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.PRODUCT_COLLECTION).findOne({_id:objectId(proId)}).then((product)=>{
                 resolve(product)
+            }).catch((err)=>{
+                reject(err)
             })
         })
     },
@@ -54,6 +58,8 @@ module.exports={
                 }
             }).then((response)=>{
                 resolve()
+            }).catch((err)=>{
+                reject(err)
             })
         })
     }, 
@@ -67,6 +73,8 @@ module.exports={
     addCategory:(category,callback)=>{
         db.get().collection('category').insertOne(category).then((data)=>{
             callback(data.insertedId)
+        }).catch((err)=>{
+            reject(err)
         })
     },
     getAllCategories:()=>{
@@ -79,6 +87,8 @@ module.exports={
         return new Promise((resolve,reject)=>{
             db.get().collection(collection.CATEGORY_COLLECTION).deleteOne({_id:objectId(categoryId)}).then((response)=>{
               resolve(response)
+            }).catch((err)=>{
+                reject(err)
             })
         })
      },
@@ -100,7 +110,9 @@ module.exports={
            
            }).then((response)=>{
                resolve(response)
-           })
+           }).catch((err)=>{
+            reject(err)
+        })
         })
     },
      updateUserunblock:(userId)=>{
@@ -112,7 +124,9 @@ module.exports={
            
            }).then((response)=>{
                resolve(response)
-           })
+           }).catch((err)=>{
+            reject(err)
+        })
         })
     },
     getAllOrders:()=>{
@@ -203,6 +217,8 @@ module.exports={
             }
         }).then((response)=>{
             resolve(response)
+        }).catch((err)=>{
+            reject(err)
         })
         })
       
@@ -217,6 +233,8 @@ module.exports={
                 }
             }).then((response)=>{
                 resolve(response)
+            }).catch((err)=>{
+                reject(err)
             })
         })
     },
@@ -559,6 +577,8 @@ module.exports={
                   }
                 }).then(()=>{
                     resolve()
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         }else{

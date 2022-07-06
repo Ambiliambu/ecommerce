@@ -51,6 +51,8 @@ module.exports={
             db.get().collection(collection.USER_COLLECTION).insertOne(user).then((data)=>{
                 resolve(data);
 
+            }).catch((err)=>{
+                reject(err)
             })
               
         })
@@ -67,6 +69,8 @@ module.exports={
             })
             .then((status) => {
               resolve(status);
+            }).catch((err)=>{
+                reject(err)
             });
         });
       },
@@ -131,6 +135,8 @@ module.exports={
                             $inc:{'products.$.quantity':1}
                         }).then(()=>{
                             resolve()
+                        }).catch((err)=>{
+                            reject(err)
                         })
                     }else{
                     db.get().collection(collection.CART_COLLECTION)
@@ -141,7 +147,9 @@ module.exports={
 
                    }).then((response)=>{
                        resolve()
-                   })
+                   }).catch((err)=>{
+                    reject(err)
+                })
                    
                     }
                 }else{
@@ -151,6 +159,8 @@ module.exports={
                     }
                     db.get().collection(collection.CART_COLLECTION).insertOne(cartObj).then((response)=>{
                         resolve()
+                    }).catch((err)=>{
+                        reject(err)
                     })
                 }
             })
@@ -169,7 +179,9 @@ module.exports={
                   {$pull:{products:{item:objectId(data.product)}}
                 }).then((response)=>{
                       resolve({removeProduct:true})
-                  })
+                  }).catch((err)=>{
+                    reject(err)
+                })
               })  
        
         },
@@ -249,7 +261,9 @@ module.exports={
                         $pull:{products:{item: objectId(details.product)}}
                     }).then((response)=>{
                         resolve({removeProduct:true})
-                    })  
+                    }).catch((err)=>{
+                        reject(err)
+                    }) 
 
                 }else{
                     db.get().collection(collection.CART_COLLECTION)
@@ -258,6 +272,8 @@ module.exports={
                         $inc:{'products.$.quantity':details.count}
                     }).then((response)=>{
                         resolve({status:true})
+                    }).catch((err)=>{
+                        reject(err)
                     })
                 }
                
@@ -386,6 +402,8 @@ module.exports={
                 db.get().collection(collection.ORDER_COLLECTION).insertOne(orderObj).then((response)=>{
                      db.get().collection(collection.CART_COLLECTION).deleteOne({user:objectId(order.userId)})
                     resolve(response.insertedId)
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
 
@@ -455,6 +473,8 @@ module.exports={
                 }
             }).then((response)=>{
                 resolve(response)
+            }).catch((err)=>{
+                reject(err)
             })
             })
           
@@ -464,7 +484,9 @@ module.exports={
             return new Promise(async(resolve,reject)=>{
              db.get().collection(collection.USER_COLLECTION).findOne({_id:objectId(userId)}).then((userDetails)=>{
                 resolve(userDetails)
-             })
+             }).catch((err)=>{
+                reject(err)
+            })
                    
         
                
@@ -487,6 +509,8 @@ module.exports={
                     }
                 }).then((response)=>{
                     resolve(response)
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         },
@@ -548,6 +572,8 @@ module.exports={
                 }
                 ).then((response)=>{
                     resolve(response);
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         },
@@ -573,6 +599,8 @@ module.exports={
                 )
                 .then((response) => {
                   resolve(response);
+                }).catch((err)=>{
+                    reject(err)
                 });
             });
           },
@@ -741,6 +769,8 @@ module.exports={
                 )
                 .then((response) => {
                   resolve(response);
+                }).catch((err)=>{
+                    reject(err)
                 });
             });
           },
@@ -781,6 +811,8 @@ module.exports={
                             $pull:{products:{item:objectId(proId)}}
                         }).then(()=>{
                             resolve()
+                        }).catch((err)=>{
+                            reject(err)
                         })
                     }else{
                     db.get().collection(collection.WISHLIST_COLLECTION)
@@ -791,7 +823,9 @@ module.exports={
 
                    }).then((response)=>{
                        resolve(response)
-                   })
+                   }).catch((err)=>{
+                    reject(err)
+                })
                    
                     }
                 }else{
@@ -801,6 +835,8 @@ module.exports={
                     }
                     db.get().collection(collection.WISHLIST_COLLECTION).insertOne(wishObj).then((response)=>{
                         resolve(response)
+                    }).catch((err)=>{
+                        reject(err)
                     })
                 }
             })
@@ -814,6 +850,8 @@ module.exports={
                 )
                 .then(()=>{
                     resolve(response)
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         },
@@ -863,6 +901,8 @@ module.exports={
             return new Promise((resolve,reject)=>{
                 db.get().collection(collection.WISHLIST_COLLECTION).findOne({user:objectId(userId)}).then((output)=>{
                     resolve(output)
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         },
@@ -874,6 +914,8 @@ module.exports={
                     {$pull:{products:{item:objectId(proId)}}}
                 ).then((response)=>{                 
                     resolve({removeProduct:true})
+                }).catch((err)=>{
+                    reject(err)
                 })
             })
         }

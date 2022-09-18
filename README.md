@@ -28,4 +28,12 @@ The project is divided into 2 sections - admin and user
  4. categories<br/>
    • admin can create categories to easily filter packages.<br/>
  5. Dashboard and report<br/>
-   • 
+   • dashboard provides one month details regarding :<br/>
+     i. number of users<br/>
+     ii. number of products<br/>
+     iii. number of orders<br/>
+     iV. total revenue<br/>
+     v. pie chart displaying the number of payments received through paypal,  razorpay and cash on delivary<br/>
+     vi. bar chart showing order status of products<br/>
+   • report can be generated for the payments received after filtering by dates. There is filtering by week ,month and year also can done.The report can be then exported into PDF,CSV or other formates.<br/>
+   

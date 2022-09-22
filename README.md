@@ -1,5 +1,5 @@
 # SHOPPERS : E-Commerece website
-Shoppers allow users to choose the products in the website.<br/>
+Shoppers is an E-commerce website that allows users to choose the products on the website and can make the payment after hand-pick the method.<br/>
 
 ## Technologies used
 • Node.js<br/>
@@ -46,15 +46,18 @@ The project is divided into 2 sections - admin and user
 
 1. user can register and login with email and password or otp login<br/>
 2. user can view different product sorted into categories<br/>
-3. detail information about the product can be accessed after clickind the product, details include:
-    ◉ mutiple images of product<br/>
-    ◉ price related details<br/>
-    ◉ about product <br/>
+3. detail information about the product can be accessed after clickind the product, details include:<br/>
+    • mutiple images of product<br/>
+    • price related details<br/>
+    • about product <br/>
 4. products are add to the cart after we choose it. From cart also you can increment the quatity of the product.We can separatity see the the count and price for each product<br/> 
 5. Once you place the order you can choose the address and payment menthod.<br/>
 6. you can apply for coupon also if it valid<br/>
 7. User have the option to manage his profile and perform action like:<br/>
-    ◉ edit personal information<br/>
-    ◉ change email, password and name<br/>
-    ◉ add address and deletea address<br/>
+    • edit personal information<br/>
+    • change email, password and name<br/>
+    • add address and deletea address<br/>
 8. User can view the order details.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+

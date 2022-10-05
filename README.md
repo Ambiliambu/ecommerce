@@ -76,6 +76,12 @@ To get started you can simply clone this ecommerce repository and  install the d
  
  npm install <br/>
  
+ #### Start running:<br/>
+ 
+ npm start
+ 
+ 
+
  
  
 

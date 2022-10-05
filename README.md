@@ -71,6 +71,33 @@ Clone the ecommerce repository using git :<br/>
 Install dependencies with this command :<br/>
  
  npm install <br/>
+ 
+ 
+ 
+ 
+ # if you don't have AdonisJS CLI
+npm i -g @adonisjs/cli
+
+# Change directory
+cd adonis-url-short
+
+# Install Dependencies
+npm install
+
+# Copy .env.example to .env and update it to your specific needs. Don't forget to set DB_USER and DB_PASSWORD with the settings used behind.
+cp .env.example .env
+
+# Generate App Key
+adonis key:generate
+
+# Run migrations
+adonis migration:run
+
+# Seed Database
+adonis seed
+
+# Serve
+adonis serve --dev
 
 Run the application with this command :<br/>
 

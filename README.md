@@ -63,16 +63,17 @@ The project is divided into 2 sections - admin and user
 ## Getting Started
 
 To get started you can simply clone this ecommerce repository and  install the dependencies.
-
+<div style='color:"grey"'>
 Clone the ecommerce repository using git :<br/>
-<h6> git clone https://github.com/Ambiliambu/ecommerce.git </h6><br/>
-<h6> <a> cd </a> ecommerce </h6><br/>
+ git clone https://github.com/Ambiliambu/ecommerce.git </h6><br/>
+ cd  ecommerce <br/>
 
 Install dependencies with this command :<br/>
  
-<p> npm install </p><br/>
+ npm install <br/>
 
 Run the application with this command :<br/>
 
-<h6> npm  start </h6><br/>
+ npm  start <br/>
+ </div>
 

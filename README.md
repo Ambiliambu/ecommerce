@@ -66,15 +66,15 @@ To get started you can simply clone this ecommerce repository and  install the d
  
  #### Clone the ecommerce repository using git :<br/>
  
- git clone https://github.com/Ambiliambu/ecommerce.git </h6><br/>
+ `git clone https://github.com/Ambiliambu/ecommerce.git` </h6><br/>
  
  #### Change directory:
  
- cd  ecommerce <br/>
+ `cd  ecommerce` <br/>
 
 #### Install dependencies with this command :<br/>
  
- npm install <br/>
+ `npm install` <br/>
  
  #### Start running:<br/>
  

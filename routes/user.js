@@ -14,10 +14,10 @@ const createReferal = require('referral-code-generator');
 
 
 
-const serviceSID=process.env.SERVICESID
-const accountnSID=process.env.ACCOUNTNSID
-const authToken=process.env.AUTHTOKEN
-const client =require('twilio')(accountnSID,authToken)
+// const serviceSID=process.env.SERVICESID
+// const accountnSID=process.env.ACCOUNTNSID
+// const authToken=process.env.AUTHTOKEN
+// const client =require('twilio')(accountnSID,authToken)
 
 
 
@@ -25,11 +25,11 @@ const paypal = require('paypal-rest-sdk');
 const { startProductOffer } = require('../helpers/product-helpers');
 const { validateExpressRequest } = require('twilio');
  
-paypal.configure({
-  mode: 'sandbox', 
-  client_id: process.env.CLIENTID,
-  client_secret:process.env.CLIENTSECRET
-});
+// paypal.configure({
+//   mode: 'sandbox', 
+//   client_id: process.env.CLIENTID,
+//   client_secret:process.env.CLIENTSECRET
+// });
 
 
  
@@ -124,43 +124,43 @@ router.get('/login-otp',(req,res)=>{
   }
 
 })
-router.post('/login-otp',(req,res)=>{
-  let No = req.body.Mobile;
-  let no =`+91${No}`;
-userHelpers.getUsedetails(no).then((user)=>{
-  if (user){
-    if(user.Status == true){
+// router.post('/login-otp',(req,res)=>{
+//   let No = req.body.Mobile;
+//   let no =`+91${No}`;
+// userHelpers.getUsedetails(no).then((user)=>{
+//   if (user){
+//     if(user.Status == true){
     
-      client.verify
-     .services(serviceSID)
-     .verifications.create({
-       to: no,
-       channel:"sms"
+//       client.verify
+//      .services(serviceSID)
+//      .verifications.create({
+//        to: no,
+//        channel:"sms"
       
-     })
+//      })
      
-      .then((resp)=>{      
-        req.session.number=resp.to
-       res.redirect('/login/otp')
-     });
-    }
-    else{
-      req.session.blockErr='This Account has been blocked'
+//       .then((resp)=>{      
+//         req.session.number=resp.to
+//        res.redirect('/login/otp')
+//      });
+//     }
+//     else{
+//       req.session.blockErr='This Account has been blocked'
      
-      res.redirect('/login-otp')
-      req.session.blockErr=false
+//       res.redirect('/login-otp')
+//       req.session.blockErr=false
 
-    }
-  }else{
-    req.session.noNumberErr="Mobile Number Not exist";
+//     }
+//   }else{
+//     req.session.noNumberErr="Mobile Number Not exist";
     
 
-    res.redirect('/login-otp')
-    req.session.noNumberErr=false;
-  }
-})
+//     res.redirect('/login-otp')
+//     req.session.noNumberErr=false;
+//   }
+// })
 
-})
+// })
 
 router.get('/login/otp',(req,res)=>{
   if(req.session.userLoggedIn){
@@ -174,35 +174,36 @@ router.get('/login/otp',(req,res)=>{
   
   
 })
-router.post('/login/otp',(req,res)=>{
-    const otp  = req.body.Otp
-    number=req.session.number
-    client.verify
-    .services(serviceSID)
-    .verificationChecks.create({
-      to: number,
-      code: otp
 
-    })
-    .then((resp)=>{
-      let no=resp.to
-     if(resp.valid){
-      userHelpers.getusedUserdetails(no).then((user)=>{
-        req.session.userLoggedIn=true
-        req.session.user=user   
+// router.post('/login/otp',(req,res)=>{
+//     const otp  = req.body.Otp
+//     number=req.session.number
+//     client.verify
+//     .services(serviceSID)
+//     .verificationChecks.create({
+//       to: number,
+//       code: otp
+
+//     })
+//     .then((resp)=>{
+//       let no=resp.to
+//      if(resp.valid){
+//       userHelpers.getusedUserdetails(no).then((user)=>{
+//         req.session.userLoggedIn=true
+//         req.session.user=user   
 
 
-        res.redirect('/' );
+//         res.redirect('/' );
 
-      })
+//       })
       
     
-      }else{
-        req.session.otpErr="Invalid OTP"
-        res.redirect('/login/otp')
-      }
-    })
-})
+//       }else{
+//         req.session.otpErr="Invalid OTP"
+//         res.redirect('/login/otp')
+//       }
+//     })
+// })
  
 
 router.get('/signup',async(req,res)=>{

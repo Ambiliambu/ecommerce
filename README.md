@@ -95,7 +95,34 @@ To get started you can simply clone this ecommerce repository and  install the d
  
  `npm start`
  
- 
+ ## Login Details
+
+  
+  <table>
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Password</th>
+    <th>Role</th>
+    
+  
+  </tr>
+  <tr>
+  <td>anmbili@gmail.com</td>
+  <td>Ambili</td>
+  <td>123456</td>
+  <td>User</td>
+  </tr>
+   <tr>
+  <td>admin123@gmail.com</td>
+  <td>Admin</td>
+  <td>123456</td>
+  <td>Admin</td>
+  </tr>
+  
+
+</table>
+
 
  
  

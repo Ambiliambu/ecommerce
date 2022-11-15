@@ -60,6 +60,21 @@ The project is divided into 2 sections - admin and user
 8. User can view the order details.
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
+## Screenshots
+
+![Screenshot from 2022-11-15 16-12-23](https://user-images.githubusercontent.com/99420180/201905053-02667951-dfc4-4009-aec7-dc06b8a05314.png)
+![Screenshot from 2022-11-15 16-25-32](https://user-images.githubusercontent.com/99420180/201905077-6ec5c9f0-6b9d-47b9-985e-18ed9022e33f.png)
+![Screenshot from 2022-11-15 16-27-59](https://user-images.githubusercontent.com/99420180/201905121-68dcae52-61cb-42e5-8aa3-04fdc0c4596f.png)
+![Screenshot from 2022-11-15 16-25-03](https://user-images.githubusercontent.com/99420180/201905184-4eeb854c-c2b3-4b22-b837-e91e292de314.png)
+![Screenshot from 2022-11-15 16-29-06](https://user-images.githubusercontent.com/99420180/201905270-56356281-029c-4c43-a2e4-1f72691073f9.png)
+![Screenshot from 2022-11-15 16-31-35](https://user-images.githubusercontent.com/99420180/201905301-d075051e-8044-4997-b053-e9aa466ebaf7.png)
+![Screenshot from 2022-11-15 16-32-40](https://user-images.githubusercontent.com/99420180/201905345-90965682-a91a-48a7-8689-bf43eee81da1.png)
+![Screenshot from 2022-11-15 16-33-27](https://user-images.githubusercontent.com/99420180/201905391-3ea882ff-18ca-4154-8f8b-1c6319bac8ab.png)
+![Screenshot from 2022-11-15 16-34-20](https://user-images.githubusercontent.com/99420180/201905439-80f06c0a-b3c5-481a-9020-3d28c1b6ae08.png)
+![Screenshot from 2022-11-15 16-34-49](https://user-images.githubusercontent.com/99420180/201905485-82a230cf-bd2d-4113-b7d0-a629f3ae3ae8.png)
+![Screenshot from 2022-11-15 16-35-32](https://user-images.githubusercontent.com/99420180/201905529-c5db8ee5-cda8-4937-89c2-faa260b473fd.png)
+
+
 ## Getting Started
 
 To get started you can simply clone this ecommerce repository and  install the dependencies.
